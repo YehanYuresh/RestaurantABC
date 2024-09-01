@@ -42,16 +42,11 @@ public class UserService {
     
     //Update an existing user 
     public void updateUser(UserModel user) {
-    	UserDAO.updateUser(user); }
+    	UserDAO.updateUser(user);
+    	}
+    // Delete user
+    public void deleteUser(int Id) {
+    	UserDAO.deleteUser(Id); }
 
-	/*
-	 * 
-	 * 
-	 * // 
-	 * 
-	 * // Delete a user public void deleteUser(String username) {
-	 * UserDAO.deleteUser(username); }
-	 * 
-	 * 
-	 */
+
 }

@@ -6,23 +6,23 @@ public class UserModel {
     private String username;
     private String password;
     private String usertype;
+    private Boolean delete;
     
+    public UserModel(int id , String username, String password , String usertype, Boolean delete) {
+    	this.Id = id;
+    	this.username = username;
+        this.password = password;
+        this.usertype = usertype;
+        this.delete = delete;
+    }
     public UserModel(int id , String username, String password , String usertype) {
     	this.Id = id;
     	this.username = username;
         this.password = password;
         this.usertype = usertype;
+ 
     }
-    
-	/*
-	 * public UserModel(String username, String password , String usertype) {
-	 * this.username = username; this.password = password; this.usertype = usertype;
-	 * }
-	 * 
-	 * public UserModel(String username, String password) { this.username =
-	 * username; this.password = password; }
-	 */
-    
+       
     public UserModel() {		
 	}
     
@@ -49,11 +49,20 @@ public class UserModel {
 		this.password = password;
 	}
 	
+	
 	public String getUserType() {
 		return usertype;
 	}
 	public void setUserType(String usertype) {
 		this.usertype = usertype;
+	}
+	
+	
+	public Boolean getDelete() {
+		return delete;
+	}
+	public void setDelete(Boolean delete) {
+		this.delete = delete;
 	}
 	
 }

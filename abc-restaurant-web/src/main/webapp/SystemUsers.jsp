@@ -49,7 +49,7 @@
                       <%--  <td>${user.UserType}</td>   --%>
                         <td>
                     <a href="user?action=edit&id=${user.id}">Edit</a> |
-                    <a href="user?action=delete=${user.id}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a href="user?action=delete&id=${user.id}" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
                     </tr>
                 </c:forEach>
