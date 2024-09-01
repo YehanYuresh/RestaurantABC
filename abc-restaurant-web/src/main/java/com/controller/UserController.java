@@ -42,6 +42,11 @@ public class UserController extends HttpServlet {
          else if (action.equals("regis")) {
 	     	showRegisForm(request, response);
 	     }
+         else if (action.equals("delete")) {
+      	   String ID = request.getParameter("id");
+      	   Integer id = Integer.valueOf(ID);
+      	 deleteUser(request,response,id);
+      }
         }
 	
 	
@@ -79,6 +84,12 @@ public class UserController extends HttpServlet {
 	 private void showRegisForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        request.getRequestDispatcher("regisUser.jsp").forward(request, response);
 	    }
+	  private void deleteUser(HttpServletRequest request, HttpServletResponse response , int Id ) throws ServletException, IOException {
+		//	String ID = request.getParameter("Id");
+			//Integer id = Integer.valueOf(ID);			
+	        userService.deleteUser(Id);
+	        response.sendRedirect("user?action=list");
+		  }
 	 
 	 
 	 //common post method--------------------------------------------------------------------

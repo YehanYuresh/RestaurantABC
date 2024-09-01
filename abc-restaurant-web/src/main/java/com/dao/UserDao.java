@@ -12,14 +12,12 @@ import com.model.UserModel;
 
 
 public class UserDao {	
-	private List<UserModel> users;
+	//private List<UserModel> users;
 	
 
 	  // User Login Validation 
 	  public boolean validateUser (String Username,String Password) throws 	  SQLException { 
-		//  List<UserModel> userlist = new ArrayList<>(); 
-
-		 String query =	"SELECT * FROM systemuser where UserName = ? and Password = ?";
+		 String query =	"SELECT * FROM systemuser where UserName = ? and Password = ? and isdelete = false ";
 		 
 		   try (Connection connection = DBConnectionFactory.getConnection();
 			         PreparedStatement statement = connection.prepareStatement(query)) {
@@ -38,31 +36,12 @@ public class UserDao {
 			        e.printStackTrace();
 			        throw e; // Propagate the exception after logging it
 			    }
-		  
-			/*
-			 * Connection connection = DBConnectionFactory.getConnection();
-			 * PreparedStatement statement = connection.prepareStatement(query);
-			 * statement.setString(1, Username); statement.setString(2, Password); ResultSet
-			 * resultSet = statement.executeQuery();
-			 * 
-			 * while (resultSet.next()) { int id = resultSet.getInt("Id"); String username =
-			 * resultSet.getString("UserName"); String password =
-			 * resultSet.getString("Password"); String usertype =
-			 * resultSet.getString("UserType"); users.add(new UserModel(id, username,
-			 * password, usertype)); }
-			 * 
-			 * if (users!=null) { return true; }else { return false; }
-			 */
 	  }
-
-	 
-	 
-
 
     // Get all users
     public List<UserModel> getAllUsers()  throws SQLException {
     	  List<UserModel> users = new ArrayList<>();
-          String query = "SELECT * FROM systemuser";
+          String query = "SELECT * FROM systemuser WHERE isdelete = false ";
 
           Connection connection = DBConnectionFactory.getConnection();
           Statement statement = connection.createStatement();
@@ -80,7 +59,7 @@ public class UserDao {
     
  // Add a new user
 	public void addUser(UserModel user) {
-        String query = "INSERT INTO systemuser (UserName, Password, UserType) VALUES (?, ?, ?)";
+        String query = "INSERT INTO systemuser (UserName, Password, UserType, isdelete) VALUES (?, ?, ?, false)";
         try 
         {   Connection connection = DBConnectionFactory.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
@@ -98,7 +77,7 @@ public class UserDao {
    // get id wise user
 	   public UserModel getUserByUsername(int Id)  throws SQLException {
 		   List<UserModel> users = new ArrayList<>(); 
-			 String query =	"SELECT * FROM systemuser where id= ?";
+			 String query =	"SELECT * FROM systemuser where Id= ?";
 			  
 			  Connection connection = DBConnectionFactory.getConnection();
 			  PreparedStatement statement = connection.prepareStatement(query);
@@ -109,7 +88,8 @@ public class UserDao {
 					  ; String username =  resultSet.getString("UserName"); 
 					  String password =  resultSet.getString("Password");
 					  String usertype =	  resultSet.getString("UserType");
-					  users.add(new UserModel(id, username,	  password, usertype)); }
+			          	users.add(new UserModel(id, username, password, usertype));
+					  }
 			  
 			  for (UserModel u : users) {		           
 		                return u;		           
@@ -117,8 +97,9 @@ public class UserDao {
 		        return null;
 		        }
 	   
+	   // Update user	   
 		public void updateUser(UserModel user) {
-	        String query = "UPDATE systemuser SET UserName = ?, Password = ?, UserType = ? WHERE id = ?";
+	        String query = "UPDATE systemuser SET UserName = ?, Password = ?, UserType = ? WHERE Id = ?";
 	        try 
 	        {   Connection connection = DBConnectionFactory.getConnection();
 	            PreparedStatement statement = connection.prepareStatement(query);
@@ -126,6 +107,22 @@ public class UserDao {
 	            statement.setString(2, user.getPassword());
 	            statement.setString(3, user.getUserType());
 	            statement.setInt(4, user.getId());
+	            statement.executeUpdate();
+	        } 
+	        catch (SQLException e) 
+	        {
+	            e.printStackTrace();
+	        }
+	    }
+		
+		 // Delete user	as update   
+		public void deleteUser(int Id) {
+	        String query = "UPDATE systemuser SET isdelete = 1 WHERE Id = ?";
+	        try 
+	        {   Connection connection = DBConnectionFactory.getConnection();
+	            PreparedStatement statement = connection.prepareStatement(query);
+	            statement.setInt(1, Id);
+
 	            statement.executeUpdate();
 	        } 
 	        catch (SQLException e) 

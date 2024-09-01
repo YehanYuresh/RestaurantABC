@@ -15,6 +15,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+             <li class="nav-item">
+                    <a class="nav-link" href="order?action=list">Order</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="product?action=list">Product</a>
                 </li>
