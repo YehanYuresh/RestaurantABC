@@ -22,10 +22,15 @@
         }
     </style>
 </head>
-<body>
+<body style="background-image: url('image/grid-back.jpg'); background-size: cover;   " >
+
     <div class="container">
         <h1 class="text-center">Pending Order List</h1>
-        <table class="table table-striped table-bordered">
+        <div class="table table-striped ">
+            <a href="order?action=all" class="btn btn-danger">All Orders</a>
+        </div>
+        <br>
+        <table style="background-color:white;" class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <!-- <th>ID</th> -->
@@ -54,9 +59,7 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div class="text-center">
-            <a href="order?action=all" class="btn btn-primary">All Order</a>
-        </div>
+        
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

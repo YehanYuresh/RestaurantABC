@@ -7,13 +7,22 @@ public class UserModel {
     private String password;
     private String usertype;
     private Boolean delete;
+    private int	mobile;
     
-    public UserModel(int id , String username, String password , String usertype, Boolean delete) {
+    public UserModel(int id , String username, String password , String usertype, Boolean delete , int mobile) {
     	this.Id = id;
     	this.username = username;
         this.password = password;
         this.usertype = usertype;
         this.delete = delete;
+        this.mobile = mobile;
+    }
+    public UserModel(int id , String username, String password , String usertype, int mobile) {
+    	this.Id = id;
+    	this.username = username;
+        this.password = password;
+        this.usertype = usertype;
+        this.mobile = mobile;
     }
     public UserModel(int id , String username, String password , String usertype) {
     	this.Id = id;
@@ -65,4 +74,10 @@ public class UserModel {
 		this.delete = delete;
 	}
 	
+	  public int getMobile() {
+			return mobile;
+		}
+		public void setMobile(int mobile) {
+			this.mobile = mobile;
+		}
 }
