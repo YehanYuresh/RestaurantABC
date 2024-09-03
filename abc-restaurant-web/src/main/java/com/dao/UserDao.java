@@ -19,10 +19,9 @@ public class UserDao {
 	  public boolean validateUser (String Username,String Password) throws 	  SQLException { 
 		 String query =	"SELECT * FROM systemuser where UserName = ? and Password = ? and isdelete = false ";
 		 
-		   try {
-				   Connection connection = DBConnectionFactory.getConnection();
-			         PreparedStatement statement = connection.prepareStatement(query);
-		   	         
+		   try (Connection connection = DBConnectionFactory.getConnection();
+			         PreparedStatement statement = connection.prepareStatement(query)) {
+			         
 			        statement.setString(1, Username);
 			        statement.setString(2, Password);
 			        ResultSet resultSet = statement.executeQuery();
@@ -33,9 +32,9 @@ public class UserDao {
 			        } else {
 			            return false; // No user found with these credentials
 			        }
-			    } catch (SQLException e) {			  
-			    	return false;
-			         // Propagate the exception after logging it
+			    } catch (SQLException e) {
+			        e.printStackTrace();
+			        throw e; // Propagate the exception after logging it
 			    }
 	  }
 
@@ -53,22 +52,20 @@ public class UserDao {
           	String username = resultSet.getString("UserName");
           	String password = resultSet.getString("Password");
           	String usertype = resultSet.getString("UserType");
-          	int mobile = resultSet.getInt("MobileNo");
-          	users.add(new UserModel(id, username, password, usertype,mobile));
+          	users.add(new UserModel(id, username, password, usertype));
           }
         return users;
     }
     
  // Add a new user
 	public void addUser(UserModel user) {
-        String query = "INSERT INTO systemuser (UserName, Password, UserType, MobileNo, isdelete) VALUES (?, ?, ?,?, false)";
+        String query = "INSERT INTO systemuser (UserName, Password, UserType, isdelete) VALUES (?, ?, ?, false)";
         try 
         {   Connection connection = DBConnectionFactory.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getUserType());
-            statement.setInt(4, user.getMobile());
             statement.executeUpdate();
         } 
         catch (SQLException e) 
@@ -91,8 +88,7 @@ public class UserDao {
 					  ; String username =  resultSet.getString("UserName"); 
 					  String password =  resultSet.getString("Password");
 					  String usertype =	  resultSet.getString("UserType");
-			          	int mobile = resultSet.getInt("MobileNo");
-			          	users.add(new UserModel(id, username, password, usertype,mobile));
+			          	users.add(new UserModel(id, username, password, usertype));
 					  }
 			  
 			  for (UserModel u : users) {		           
@@ -103,15 +99,14 @@ public class UserDao {
 	   
 	   // Update user	   
 		public void updateUser(UserModel user) {
-	        String query = "UPDATE systemuser SET UserName = ?, Password = ?, UserType = ? , MobileNo = ? WHERE Id = ?";
+	        String query = "UPDATE systemuser SET UserName = ?, Password = ?, UserType = ? WHERE Id = ?";
 	        try 
 	        {   Connection connection = DBConnectionFactory.getConnection();
 	            PreparedStatement statement = connection.prepareStatement(query);
 	            statement.setString(1, user.getUserName());
 	            statement.setString(2, user.getPassword());
 	            statement.setString(3, user.getUserType());
-	            statement.setInt(4, user.getMobile());
-	            statement.setInt(5, user.getId());
+	            statement.setInt(4, user.getId());
 	            statement.executeUpdate();
 	        } 
 	        catch (SQLException e) 

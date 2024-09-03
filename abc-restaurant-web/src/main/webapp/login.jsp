@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <title>Login Page</title>
   <link rel="stylesheet" href="./css/style.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <style>
 #bg {
@@ -17,7 +16,6 @@
   height: 100%;
   background-size: cover;
   filter: blur(5px);
-  
 }
 form .form-field:nth-child(1)::before {
   background-image: url('image/user-icon.png');
@@ -46,10 +44,10 @@ form .form-field:nth-child(2)::before {
     </div>
   
   <div class="form-field">
-    <button class="btn btn-success" type="submit">Login</button>
-<!--   </div>
-  <div class="form-field"> -->
-  <a href="user?action=regis" class="btn btn-primary" >Register</a>
+    <button class="btn" type="submit">Login</button>
+  </div>
+  <div class="form-field">
+  <a href="user?action=regis" class="btn">Register</a>
   </div>
   <div class="msg">
 

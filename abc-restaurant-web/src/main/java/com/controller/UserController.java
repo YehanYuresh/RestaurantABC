@@ -109,14 +109,11 @@ public class UserController extends HttpServlet {
 		        String username = request.getParameter("username");
 		        String password = request.getParameter("password");
 		        String usertype = request.getParameter("usertype");
-		        String Mobile = request.getParameter("mobile");
-		        Integer mobile = Integer.valueOf(Mobile);
 		        
 		        UserModel user = new UserModel();
 		        user.setUserName(username);
 		        user.setPassword(password);
 		        user.setUserType(usertype);
-		        user.setMobile(mobile);
 		        userService.addUser(user);
 		        response.sendRedirect("user?action=list");
 		    }
@@ -128,15 +125,12 @@ public class UserController extends HttpServlet {
 				String username = request.getParameter("username");
 		        String password = request.getParameter("password");
 		        String usertype = request.getParameter("usertype");
-		        String Mobile = request.getParameter("mobile");
-		        Integer mobile = Integer.valueOf(Mobile);
 		        
 		        UserModel user = new UserModel();
 		        user.setId(id);
 		        user.setUserName(username);
 		        user.setPassword(password);
 		        user.setUserType(usertype);
-		        user.setMobile(mobile);
 		        userService.updateUser(user);
 		        response.sendRedirect("user?action=list");
 			  }

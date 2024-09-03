@@ -27,13 +27,10 @@
         }
     </style>
 </head>
-<body style="background-image: url('image/grid-back.jpg'); background-size: cover;   " >
+<body>
     <div class="container">
-     <h1 class="text-center">System Users</h1>
-    <div class="table table-striped ">
-     <a href="user?action=add" class="btn btn-danger" >Add New User</a> </div>
-       <br>
-        <table style="background-color:white;" class="table table-striped table-bordered">
+        <h1 class="text-center">System Users</h1>
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                 <th>Id</th>
@@ -58,8 +55,9 @@
                 </c:forEach>
             </tbody>
         </table>
-        
-
+        <div class="text-center">
+            <a href="user?action=add" class="btn btn-primary">Add New User</a>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
